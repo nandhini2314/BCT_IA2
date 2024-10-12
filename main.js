@@ -24,7 +24,7 @@ return recvWalletAddress;
 const recv_address= fetchAddress();
 new_address= fetchAddress();
 
-global.smashingCoin = new CryptoBlockchain();
+global.BCT = new CryptoBlockchain();
 
 const sendAddr= [address2, myWalletAddress, myWalletAddress, address1];
 const recvAddr= [fetchAddress(), recv_address, new_address, fetchAddress()];
@@ -32,54 +32,54 @@ const recvAddr= [fetchAddress(), recv_address, new_address, fetchAddress()];
 
 const tx3 = new Transaction(address2,fetchAddress(),3);
 tx3.signTransaction(Key2);
-global.smashingCoin.addTransaction(tx3);
+global.BCT.addTransaction(tx3);
 
 
 const tx1 = new Transaction(myWalletAddress,recv_address,10);
 tx1.signTransaction(myKey);
-global.smashingCoin.addTransaction(tx1);
+global.BCT.addTransaction(tx1);
 
 
 const dsa_tx = new Transaction(myWalletAddress,new_address,10);
 dsa_tx.signTransaction(myKey);
-global.smashingCoin.addTransaction(dsa_tx);
+global.BCT.addTransaction(dsa_tx);
 
 const tx2 = new Transaction(address1,fetchAddress(),5);
 tx2.signTransaction(Key1);
-global.smashingCoin.addTransaction(tx2);
+global.BCT.addTransaction(tx2);
 
 
 console.log("\nThe current blockchain is:");
-console.log(global.smashingCoin);
+console.log(global.BCT);
 
 
 console.log("\nStarting the miner...");
 
 for(const addr of sendAddr)
 {
-global.smashingCoin.minePendingTransactions(addr);
+global.BCT.minePendingTransactions(addr);
 }
 
 
-const ne= new NetworkObserver(global.smashingCoin.pendingTransactions, global.smashingCoin);
+const ne= new NetworkObserver(global.BCT.pendingTransactions, global.BCT);
 
 ne.getRecords(sendAddr);
 console.log("\nThe current blockchain is:");
-console.log(global.smashingCoin);
+console.log(global.BCT);
 
-for(var block in global.smashingCoin.blockchain)
+for(var block in global.BCT.blockchain)
 {
 	if(block.precedingHash== null)
 	{
-		global.smashingCoin.blockchain.splice(global.smashingCoin.blockchain.indexOf(block),1);
+		global.BCT.blockchain.splice(global.BCT.blockchain.indexOf(block),1);
 		let cb= new CryptoBlock(0,Date.now(),"0");
-		global.smashingCoin.blockchain.push(cb);
+		global.BCT.blockchain.push(cb);
 	}
 }
 
-console.log("Current blockchain is:",global.smashingCoin);
+console.log("Current blockchain is:",global.BCT);
 
 console.log("\nPerforming Transactions:");
-console.log("Current balance of address ",address2,"is: "+smashingCoin.getBalanceOfAddress(address2));
-console.log("Current balance of address ",address1,"is: "+smashingCoin.getBalanceOfAddress(address1));
+console.log("Current balance of address ",address2,"is: "+BCT.getBalanceOfAddress(address2));
+console.log("Current balance of address ",address1,"is: "+BCT.getBalanceOfAddress(address1));
 

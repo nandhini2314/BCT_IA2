@@ -11,7 +11,7 @@ class NetworkObserver
     {
     	for(const address of sendAddr)
     	{
-	    	var initial_balance= global.smashingCoin.getBalanceOfAddress(address);
+	    	var initial_balance= global.BCT.getBalanceOfAddress(address);
 	    	
 	    	var num=0;
 
