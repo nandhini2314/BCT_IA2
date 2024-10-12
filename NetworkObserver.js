@@ -14,9 +14,9 @@ class NetworkObserver
 	    	var initial_balance= global.smashingCoin.getBalanceOfAddress(address);
 	    	
 	    	var num=0;
-	    	//Total amount to pay based on number of transactions
+
 	    	var total_payment_amt= 0;
-	    	//Array to store transaction amounts from this address
+	  
 	    	var amts= new Array();
 
 	    	for(const trans of this.pending_transactions){
@@ -33,7 +33,7 @@ class NetworkObserver
 	    }
     }
 
-    //Function to check for double spending attacks
+
     check_DoubleSpendingAttack(total, balance, num, address, amts)
     {
     	console.log("\nNumber of pending transactions from address: ");
